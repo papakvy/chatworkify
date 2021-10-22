@@ -1,0 +1,62 @@
+namespace :chatwork do
+  desc "Notify Chatwork Started"
+  task :notify_started do
+    set :chatwork_time_started, Time.now
+    run_locally do
+      if fetch(:chatwork_notify_events).include? :started
+        info 'Notifying Chatwork of deploy starting'
+        Chatworkify::Cw.new.call(Chatworkify::CwLib.message_body(:starting))
+      end
+    end
+  end
+  before 'deploy:starting', 'chatwork:notify_started'
+
+  desc "Notify Chatwork Finished"
+  task :notify_finished do
+    set :chatwork_time_finished, Time.now
+    run_locally do
+      if fetch(:chatwork_notify_events).include? :finished
+        info 'Notifying Chatwork of deploy finished'
+        Chatworkify::Cw.new.call(Chatworkify::CwLib.message_body(:success))
+      end
+    end
+  end
+  after 'deploy:finished', 'chatwork:notify_finished'
+
+  desc "Notify Chatwork Finished"
+  task :notify_failed do
+    set :chatwork_time_finished, Time.now
+    run_locally do
+      if fetch(:chatwork_notify_events).include? :failed
+        info 'Notifying Chatwork of deploy failed'
+        Chatworkify::Cw.new.call(Chatworkify::CwLib.message_body(:failed))
+      end
+    end
+  end
+  after 'deploy:failed', 'chatwork:notify_failed'
+end
+
+namespace :load do
+  task :defaults do
+    set :local_user, ->{ ENV["USER"] || ENV["LOGNAME"] || ENV["USERNAME"] }
+    set :ip_address, ->{
+      servers = release_roles(:all)
+      servers = servers.select{ |e| ENV['HOSTS']&.include?(e.hostname) } if ENV['HOSTS']
+      servers.map{ |e| ["#{e.hostname} (#{e.properties.fetch(:my_property).upcase!})"]}.join(', ')
+    }
+    set :chatwork_deploy_starting_text, ->{
+      "#{fetch(:application)} deploy by ⎡#{fetch(:local_user)}⎦: " \
+      "starting..."
+    }
+    set :chatwork_deploy_succeed_text, ->{
+      time_elapsed = Integer(fetch(:chatwork_time_finished, 0).to_i - fetch(:chatwork_time_started, 0).to_i)
+      "#{fetch(:application)} deploy by ⎡#{fetch(:local_user)}⎦: " \
+      "successful in #{time_elapsed} seconds."
+    }
+    set :chatwork_deploy_failed_text, ->{
+      "#{fetch(:application)} deploy by ⎡#{fetch(:local_user)}⎦: " \
+      "failed!"
+    }
+    set :chatwork_notify_events, [:started, :finished, :failed]
+  end
+end

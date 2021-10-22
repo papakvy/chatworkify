@@ -7,7 +7,5 @@ class ChatworkifyTest < Minitest::Test
     refute_nil ::Chatworkify::VERSION
   end
 
-  def test_it_does_something_useful
-    assert false
-  end
+  # TODO: update soon
 end

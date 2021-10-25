@@ -38,6 +38,7 @@ end
 
 namespace :load do
   task :defaults do
+    set :chatwork_room_id, nil
     set :local_user, ->{ ENV["USER"] || ENV["LOGNAME"] || ENV["USERNAME"] }
     set :ip_address, ->{
       servers = release_roles(:all)

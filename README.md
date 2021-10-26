@@ -22,7 +22,7 @@ Or install it yourself as:
 
 Require the gem in your `Capfile`:
 
-    require 'capistrano/slackify'
+    require 'capistrano/chatworkify'
 
 ## Configuration
 

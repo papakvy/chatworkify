@@ -1,8 +1,9 @@
 # Chatworkify
 
-[![Gem Version](https://badge.fury.io/rb/chatworkify.svg)](https://badge.fury.io/rb/chatworkify)
-[![Tests 🧪](https://github.com/rs-phunt/chatworkify/actions/workflows/run_tests.yml/badge.svg)](https://github.com/rs-phunt/chatworkify/actions/workflows/run_tests.yml)
-[![Rubocop Lint](https://github.com/rs-phunt/chatworkify/actions/workflows/run_rubocop.yml/badge.svg)](https://github.com/rs-phunt/chatworkify/actions/workflows/run_rubocop.yml)
+![Gem](https://img.shields.io/gem/v/chatworkify?color=%234cc61f&label=Gem%20version&logo=ruby&logoColor=red)
+![Gem](https://img.shields.io/gem/dt/chatworkify?color=%2330c754&label=Downloads&logo=rubygems&logoColor=red)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rs-phunt/chatworkify/Tests%20%F0%9F%A7%AA?label=Tests&logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rs-phunt/chatworkify/Rubocop%20Lint?label=Rubocop&logo=github)
 
 ## Installation
 

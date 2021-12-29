@@ -32,7 +32,7 @@ Require the gem in your `Capfile`:
 
 - Export to your `bash`: `export CHATWORK_API_TOKEN=xxx`
 
-- Add to `.env` if you're using `config` gem
+- Add to `.env` if you're using `dotenv` gem
 
 
 ### Puts `CHATWORK_ROOM_ID` into your ENV or custom in `config/deploy`

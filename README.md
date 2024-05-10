@@ -47,4 +47,4 @@ set :chatwork_room_id, 'xxx'
 
 ### Copyright
 
-©phunt
+©rs-phunt
